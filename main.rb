@@ -19,6 +19,7 @@
 
 require_relative 'open_file'
 require_relative 'print'
+require_relative 'add'
 
 menu = <<-EOF
 [p] List of comics
@@ -33,3 +34,4 @@ EOF
 puts menu
 puts
 puts Print.print
+Add.add

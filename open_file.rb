@@ -17,15 +17,16 @@
 #
 # Copyright (C) 2019  Ivan Guerreschi
 
-module OpenFile
+module OpenFile 
+  @file = File 
   def self.open(mode)
     name_file = 'comics.txt'
     begin
-      File.open(name_file, mode)
+      @file = File.open(name_file, mode)
     end
   rescue Errno::ENOENT => e
     stderr.puts "File not found #{e}"
-    file = File.new(name_file, 'w')
-    file.close
-  end
+    new_file = File.new(name_file, 'w')
+    new_file.close
+  end   
 end

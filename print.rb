@@ -17,11 +17,9 @@
 #
 # Copyright (C) 2019  Ivan Guerreschi
 
-require './open_file'
-
 module Print
   def self.print
-    OpenFile.open('r').each_line do |line|
+    File.open('comics.txt', 'r').each_line do |line|
       date, number, name = line.split(':')
       puts "Date: #{date}"
       puts "Number: #{number}"
