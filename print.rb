@@ -21,7 +21,7 @@ require './open_file'
 
 module Print
   def self.print
-    OpenFile.open.each_line do |line|
+    OpenFile.open('r').each_line do |line|
       date, number, name = line.split(':')
       puts "Date: #{date}"
       puts "Number: #{number}"

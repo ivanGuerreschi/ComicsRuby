@@ -18,10 +18,10 @@
 # Copyright (C) 2019  Ivan Guerreschi
 
 module OpenFile
-  def self.open
+  def self.open(mode)
     name_file = 'comics.txt'
     begin
-      File.open(name_file, 'r')
+      File.open(name_file, mode)
     end
   rescue Errno::ENOENT => e
     stderr.puts "File not found #{e}"
