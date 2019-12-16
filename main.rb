@@ -1,3 +1,5 @@
+#!/usr/bin/ruby
+
 #This program is free software: you can redistribute it and/or modify
 #it under the terms of the GNU General Public License as published by
 #the Free Software Foundation, either version 3 of the License, or
@@ -15,7 +17,10 @@
 #
 #Copyright (C) 2019  Ivan Guerreschi
 
-menu = <<EOF
+require_relative 'open_file'
+require_relative 'print'
+
+menu = <<-EOF
 [p] List of comics
 [i] Enter comic book
 [e] Delete comic
@@ -26,3 +31,5 @@ menu = <<EOF
 EOF
 
 puts menu
+puts
+puts Print.print
