@@ -25,42 +25,50 @@
 class Comics
   @comics_file = 'comics.txt'
   def self. print
-    File.open(@@comics_file, 'r').each_line do |line|
+    File.open(@comics_file, 'r').each_line do |line|
       date, number, name = line.split(':')
       puts "Date: #{date}"
       puts "Number: #{number}"
       puts "Name: #{name}"
     end
+  rescue Errno::ENOENT => e
+    warn "Caught the exception: #{e}"
   end
 
   def self.add(date, number, name)
-    File.open(@@comics_file, 'a+') do |file|
+    File.open(@comics_file, 'a+') do |file|
       file.puts "#{date}:#{number}:#{name}"
     end
+  rescue Errno::ENOENT => e
+    warn "Caught the exception: #{e}"
   end
 
   def self.delete(number)
-    deleted_content = File.readlines(@@comics_file).reject do |line|
+    deleted_content = File.readlines(@comics_file).reject do |line|
       line =~ /:#{number}:/
     end
-    File.open(@@comics_file, 'w') do |file|
+    File.open(@comics_file, 'w') do |file|
       deleted_content.each do |line|
         file.puts line
       end
     end
+  rescue Errno::ENOENT => e
+    warn "Caught the exception: #{e}"
   end
 
   def self.sort
-    sort_content = File.readlines(@@comics_file).sort
-    File.open(@@comics_file, 'w') do |file|
+    sort_content = File.readlines(@comics_file).sort
+    File.open(@comics_file, 'w') do |file|
       sort_content.each do |line|
         file.puts line
       end
     end
+  rescue Errno::ENOENT => e
+    warn "Caught the exception: #{e}"
   end
 
   def self.search(search)
-    File.open(@@comics_file, 'r').each_line do |line|
+    File.open(@comics_file, 'r').each_line do |line|
       next unless line =~ /#{search}/
 
       date, number, name = line.split(':')
@@ -68,19 +76,25 @@ class Comics
       puts "Number: #{number}"
       puts "Name: #{name}"
     end
+  rescue Errno::ENOENT => e
+    warn "Caught the exception: #{e}"
   end
 
   def self.remove_blank_line
-    File.write(@@comics_file, File.readlines(@@comics_file).reject do |line|
+    File.write(@comics_file, File.readlines(@comics_file).reject do |line|
       line.strip.empty?
     end.join)
+  rescue Errno::ENOENT => e
+    warn "Caught the exception: #{e}"
   end
 
   def self.replace(old, new)
-    new_content = File.read(@@comics_file).gsub(old, new)
-    File.open(@@comics_file, 'w') do |file|
+    new_content = File.read(@comics_file).gsub(old, new)
+    File.open(@comics_file, 'w') do |file|
       file.puts new_content
     end
+  rescue Errno::ENOENT => e
+    warm "Caught the exception: #{e}"
   end
 end
 
