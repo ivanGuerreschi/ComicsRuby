@@ -24,6 +24,8 @@
 # Class for managing the comics text file
 class Comics
   @comics_file = 'comics.txt'
+  File.new(@comics_file, 'w') unless File.exist?(@comics_file)
+
   def self. print
     File.open(@comics_file, 'r').each_line do |line|
       date, number, name = line.split(':')
